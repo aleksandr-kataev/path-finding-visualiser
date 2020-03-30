@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const exec = require('child_process').exec;
 const path = require('path');
-const jarPath = path.join(__dirname, '..', 'test.jar');
+const jarPath = path.join(__dirname, '..', '/java', 'test.jar');
 
 /**
  *  @router POST routes/bubbleSort
