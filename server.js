@@ -5,8 +5,10 @@ const publicPath = path.join(__dirname, './client/build');
 const port = require('./config').port;
 const bubbleSort = require('./routes/bubbleSort');
 const mongoose = require('mongoose');
+const db = require('./routes/db');
 
 app.use('/bubbleSort', bubbleSort);
+app.use('/db', db);
 
 //DB config
 const db = require('./config').mongoURI;
