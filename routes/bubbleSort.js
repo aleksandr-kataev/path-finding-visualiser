@@ -16,10 +16,10 @@ router.post('/', (req, res) => {
     stdout,
     stderr,
   ) {
-    res.status(200).json(JSON.parse(stdout));
     if (error !== null) {
       res.status(500).json(error);
     }
+    res.status(200).json(JSON.parse(stdout));
   });
 });
 
