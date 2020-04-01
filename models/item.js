@@ -21,7 +21,7 @@ const itemSchema = new Schema({
   },
 });
 
-module.exports = item = mongoose.model('item', itemSchema);
+module.exports = Item = mongoose.model('Item', itemSchema);
 
 /**
  * object = {
