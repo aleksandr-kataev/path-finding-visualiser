@@ -1,23 +1,27 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import MainHeader from "./components/MainHeader";
+import SubHeader from "./components/SubHeader";
+import Visualiser from "./components/Visualiser";
+import { Grid } from "@material-ui/core";
+import "./App.scss";
 
-export function App(props) {
-  const onClick = () => {
-    axios({
-      method: 'post',
-      url: '/bubbleSort',
-      headers: {'Content-Type': 'application/json'},
-      data: {
-        start: 'start',
-        end: 'end',
-      },
-    }).then((res) => {
-      alert(res.data.args1);
-      alert(res.data.args2);
-    });
-  };
-
-  return <button onClick={onClick}>click</button>;
-}
-
+const App = () => {
+  return (
+    <Grid container direction='column'>
+      <Grid item>
+        <MainHeader />
+      </Grid>
+      <Grid item>
+        <SubHeader />
+      </Grid>
+      <Grid item>
+        <Visualiser />
+      </Grid>
+    </Grid>
+  );
+};
 export default App;
+
+//#97dffc
+//#858ae3
+//#613dc1
