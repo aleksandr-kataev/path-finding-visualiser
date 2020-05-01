@@ -1,29 +1,38 @@
-const path = require('path');
-const express = require('express');
+import { join } from "path";
+import express from "express";
 const app = express();
-const publicPath = path.join(__dirname, './client/build');
-const port = require('./config').port;
-const bubbleSort = require('./routes/bubbleSort');
-const mongoose = require('mongoose');
-const db = require('./routes/db');
+const publicPath = join(__dirname, "./client/build");
+import { port } from "./config";
+import bubbleSort from "./routes/bubbleSort";
+import { connect } from "mongoose";
+import dbRoute from "./routes/db";
+import cors from "cors";
+import bodyParser from "body-parser";
+import morgan from "morgan";
 
-app.use('/bubbleSort', bubbleSort);
-app.use('/db', db);
+// CORS Middleware
+app.use(cors());
+// Logger Middleware
+app.use(morgan("dev"));
+// Bodyparser Middleware
+app.use(bodyParser.json());
+
+app.use("/db", dbRoute);
+app.use("/bubbleSort", bubbleSort);
 
 //DB config
-const db = require('./config').mongoURI;
+import { mongoURI as db } from "./config";
 
 //Connect to db
-mongoose
-  .connect(db)
-  .then(() => console.log('Database connected'))
+connect(db)
+  .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
 //Serve assets
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(publicPath));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'));
+  app.get("*", (req, res) => {
+    res.sendFile(join(publicPath, "index.html"));
   });
 }
 

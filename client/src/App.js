@@ -1,5 +1,5 @@
 import React from "react";
-import MainHeader from "./components/MainHeader";
+import MainHeader from "./components/main_header/MainHeader";
 import SubHeader from "./components/SubHeader";
 import Visualiser from "./components/Visualiser";
 import { Grid } from "@material-ui/core";
@@ -7,17 +7,19 @@ import "./App.scss";
 
 const App = () => {
   return (
-    <Grid container direction='column'>
-      <Grid item>
-        <MainHeader />
+    <div className='app'>
+      <Grid container direction='column'>
+        <Grid item>
+          <MainHeader />
+        </Grid>
+        <Grid item>
+          <SubHeader />
+        </Grid>
+        <Grid item>
+          <Visualiser />
+        </Grid>
       </Grid>
-      <Grid item>
-        <SubHeader />
-      </Grid>
-      <Grid item>
-        <Visualiser />
-      </Grid>
-    </Grid>
+    </div>
   );
 };
 export default App;

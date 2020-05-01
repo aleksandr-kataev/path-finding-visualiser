@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const exec = require('child_process').exec;
-const path = require('path');
-const jarPath = path.join(__dirname, '..', '/java', 'test.jar');
+import { Router } from "express";
+const router = Router();
+import { exec } from "child_process";
+import { join } from "path";
+const jarPath = join(__dirname, "..", "/java", "test.jar");
 
 /**
  *  @router POST routes/bubbleSort
@@ -10,11 +10,11 @@ const jarPath = path.join(__dirname, '..', '/java', 'test.jar');
  *  @access Public
  */
 
-router.post('/', (req, res) => {
-  child = exec(`java -jar ${jarPath} test test`, function(
+router.post("/", (req, res) => {
+  child = exec(`java -jar ${jarPath} test test`, function (
     error,
     stdout,
-    stderr,
+    stderr
   ) {
     if (error !== null) {
       res.status(500).json(error);
@@ -23,4 +23,4 @@ router.post('/', (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;
