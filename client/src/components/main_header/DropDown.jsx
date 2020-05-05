@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   ClickAwayListener,
   Grow,
@@ -10,7 +10,7 @@ import {
   makeStyles,
   Button,
 } from "@material-ui/core";
-import { useGet } from "../../Request";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,10 +22,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropDown = () => {
-  const fetchedAlgorithms = useGet("/db");
+  const [data, setData] = useState([]);
+  const [err, setError] = useState();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+
+  const fetchedAlgorithms = async () => {
+    const res = await axios({
+      method: "get",
+      url: "/db",
+      //DEV http://localhost:5000/db
+      responseType: "stream",
+    })
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        setError(err);
+      });
+  };
+
+  useEffect(() => {
+    fetchedAlgorithms();
+  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -67,11 +88,15 @@ const DropDown = () => {
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id='menu-list-grow'>
-                    {fetchedAlgorithms.response.data.map((item, i) => (
-                      <MenuItem key={i} onClick={handleClose}>
-                        {item.name}
-                      </MenuItem>
-                    ))}
+                    {!err ? (
+                      data.map((item, i) => (
+                        <MenuItem key={i} onClick={handleClose}>
+                          {item.name}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <MenuItem> Failed to retreive data {data[0]}</MenuItem>
+                    )}
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

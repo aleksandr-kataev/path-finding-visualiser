@@ -1,30 +1,23 @@
-import { join } from "path";
-import express from "express";
+const path = require("path");
+const express = require("express");
 const app = express();
-const publicPath = join(__dirname, "./client/build");
-import { port } from "./config";
-import bubbleSort from "./routes/bubbleSort";
-import { connect } from "mongoose";
-import dbRoute from "./routes/db";
-import cors from "cors";
-import bodyParser from "body-parser";
-import morgan from "morgan";
+const publicPath = path.join(__dirname, "./client/build");
+const port = require("./config").port;
+const bubbleSort = require("./routes/bubbleSort");
+const mongoose = require("mongoose");
+const dbRoute = require("./routes/db");
+const cors = require("cors");
 
-// CORS Middleware
 app.use(cors());
-// Logger Middleware
-app.use(morgan("dev"));
-// Bodyparser Middleware
-app.use(bodyParser.json());
-
 app.use("/db", dbRoute);
 app.use("/bubbleSort", bubbleSort);
 
 //DB config
-import { mongoURI as db } from "./config";
+const db = require("./config").mongoURI;
 
 //Connect to db
-connect(db)
+mongoose
+  .connect(db)
   .then(() => console.log("Database connected"))
   .catch((err) => console.log(err));
 
@@ -32,7 +25,7 @@ connect(db)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(publicPath));
   app.get("*", (req, res) => {
-    res.sendFile(join(publicPath, "index.html"));
+    res.sendFile(path.join(publicPath, "index.html"));
   });
 }
 

@@ -1,8 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import DropDown from "./DropDown";
-import { useGet } from "../../Request";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ButtonAppBar() {
-  const res = useGet("/db");
   const classes = useStyles();
   return (
     <div className={classes.root}>
