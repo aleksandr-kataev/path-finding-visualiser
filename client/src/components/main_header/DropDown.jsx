@@ -1,5 +1,4 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   ClickAwayListener,
   Grow,
@@ -22,25 +21,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropDown = () => {
-  const [data, setData] = useState([]);
-  const [err, setError] = useState();
-  const classes = useStyles();
+  const [data, setData] = useState({ algorithms: [], err: null });
+  const [algo, setAlgo] = useState(null);
   const [open, setOpen] = useState(false);
+
   const anchorRef = useRef(null);
+  const classes = useStyles();
 
   const fetchedAlgorithms = async () => {
     const res = await axios({
       method: "get",
-      url: "/db",
-      //DEV http://localhost:5000/db
-      responseType: "stream",
+      url: "http://localhost:5000/db",
+      //DEV http://localhost:5d00/db
+      responseType: "json",
     })
       .then((res) => {
-        setData(res.data);
-        console.log(res.data);
+        setData({ ...data, algorithms: res.data });
       })
       .catch((err) => {
-        setError(err);
+        setData({ ...data, err: err });
       });
   };
 
@@ -52,11 +51,9 @@ const DropDown = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
+  const handleClose = (name, event) => {
     setOpen(false);
+    setAlgo(name);
   };
 
   return (
@@ -86,16 +83,19 @@ const DropDown = () => {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
+                <ClickAwayListener onClickAway={(e) => handleClose(algo, e)}>
                   <MenuList autoFocusItem={open} id='menu-list-grow'>
-                    {!err ? (
-                      data.map((item, i) => (
-                        <MenuItem key={i} onClick={handleClose}>
+                    {!data.err ? (
+                      data.algorithms.map((item, i) => (
+                        <MenuItem
+                          key={i}
+                          onClick={(e) => handleClose(item.name, e)}
+                        >
                           {item.name}
                         </MenuItem>
                       ))
                     ) : (
-                      <MenuItem> Failed to retreive data {data[0]}</MenuItem>
+                      <MenuItem>Failed to retrieve data</MenuItem>
                     )}
                   </MenuList>
                 </ClickAwayListener>
