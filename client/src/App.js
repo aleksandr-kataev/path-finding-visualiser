@@ -8,19 +8,17 @@ import "./App.scss";
 const App = () => {
   return (
     <div className='app'>
-      <AlgoContextApp.Provider value={{ algo, setAlgo }}>
-        <Grid container direction='column'>
-          <Grid item>
-            <MainHeader />
-          </Grid>
-          <Grid item>
-            <SubHeader />
-          </Grid>
-          <Grid item>
-            <Visualiser />
-          </Grid>
+      <Grid container direction='column'>
+        <Grid item>
+          <MainHeader />
         </Grid>
-      </AlgoContextApp.Provider>
+        <Grid item>
+          <SubHeader />
+        </Grid>
+        <Grid item>
+          <Visualiser />
+        </Grid>
+      </Grid>
     </div>
   );
 };
