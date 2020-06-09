@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import {
   ClickAwayListener,
   Grow,
@@ -10,6 +10,8 @@ import {
   Button,
 } from "@material-ui/core";
 import axios from "axios";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import { AlgoContext } from "../AlgoContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const DropDown = () => {
   const [data, setData] = useState({ algorithms: [], err: null });
-  const [algo, setAlgo] = useState(null);
   const [open, setOpen] = useState(false);
+  const [algo, setAlgo] = useContext(AlgoContext);
 
   const anchorRef = useRef(null);
   const classes = useStyles();
@@ -33,6 +35,7 @@ const DropDown = () => {
       method: "get",
       url: "http://localhost:5000/db",
       //DEV http://localhost:5d00/db
+      //build /db
       responseType: "json",
     })
       .then((res) => {
@@ -53,7 +56,7 @@ const DropDown = () => {
 
   const handleClose = (name, event) => {
     setOpen(false);
-    setAlgo(name);
+    setAlgo({ ...algo, type: name });
   };
 
   return (
@@ -66,6 +69,7 @@ const DropDown = () => {
           onClick={handleToggle}
         >
           Algorithms
+          <ArrowDropDownIcon></ArrowDropDownIcon>
         </Button>
         <Popper
           open={open}
@@ -109,3 +113,16 @@ const DropDown = () => {
 };
 
 export default DropDown;
+
+/**
+ * state = {
+  type: "String",
+  startingPoint: { x: int, y: int },
+  endingPoint: { x: int, y: int },
+  obst: [{ x: int, y: int }],
+  path: [{ x: int, y: int, type: string??? }]
+};
+
+
+state = "string";
+ */
