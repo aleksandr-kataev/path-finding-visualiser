@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DropDown = () => {
+const DropDown = (props) => {
   const [data, setData] = useState({ algorithms: [], err: null });
   const [open, setOpen] = useState(false);
   const [algo, setAlgo] = useContext(AlgoContext);
@@ -56,12 +56,14 @@ const DropDown = () => {
 
   const handleClose = (name, event) => {
     setOpen(false);
-    setAlgo({ ...algo, type: name });
+    if (typeof name !== "object") {
+      setAlgo({ ...algo, type: name });
+    }
   };
 
   return (
-    <div className={classes.root}>
-      <div>
+    <div className={props.className}>
+      <div className={classes.root}>
         <Button
           ref={anchorRef}
           aria-controls={open ? "menu-list-grow" : undefined}

@@ -6,14 +6,8 @@ import { Button } from "@material-ui/core";
 import { AlgoContext } from "../AlgoContext";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
+  item: {
+    marginRight: theme.spacing(10),
   },
 }));
 
@@ -21,16 +15,22 @@ const MainHeader = () => {
   const classes = useStyles();
   const [algo, setAlgo] = useContext(AlgoContext);
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar elevation={0} position='static'>
         <Toolbar>
-          <Typography variant='h6' className={classes.title}>
+          <Typography variant='h6' className={classes.item}>
             Pathfinding Visualiser
           </Typography>
-          <Button variant='contained' color='primary'>
+          <Button variant='contained' className={classes.item}>
             Visualise {algo.type}
           </Button>
-          <DropDown></DropDown>
+          <DropDown className={classes.item}></DropDown>
+          <Button variant='contained' className={classes.item}>
+            Clear walls
+          </Button>
+          <Button variant='contained' className={classes.item}>
+            Clear path
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -38,5 +38,3 @@ const MainHeader = () => {
 };
 
 export default MainHeader;
-
-//style it as a grid
