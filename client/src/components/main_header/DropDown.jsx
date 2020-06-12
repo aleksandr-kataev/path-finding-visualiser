@@ -34,12 +34,14 @@ const DropDown = (props) => {
     const res = await axios({
       method: "get",
       url: "http://localhost:5000/db",
-      //DEV http://localhost:5d00/db
+      //DEV http://localhost:5000/db
       //build /db
       responseType: "json",
     })
       .then((res) => {
+        console.log(res.data);
         setData({ ...data, algorithms: res.data });
+        console.log(data);
       })
       .catch((err) => {
         setData({ ...data, err: err });
@@ -53,11 +55,14 @@ const DropDown = (props) => {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-
   const handleClose = (name, event) => {
     setOpen(false);
     if (typeof name !== "object") {
+      console.log(name);
       setAlgo({ ...algo, type: name });
+      console.log("updated");
+      console.log(algo);
+      console.log(data);
     }
   };
 
@@ -115,16 +120,3 @@ const DropDown = (props) => {
 };
 
 export default DropDown;
-
-/**
- * state = {
-  type: "String",
-  startingPoint: { x: int, y: int },
-  endingPoint: { x: int, y: int },
-  obst: [{ x: int, y: int }],
-  path: [{ x: int, y: int, type: string??? }]
-};
-
-
-state = "string";
- */

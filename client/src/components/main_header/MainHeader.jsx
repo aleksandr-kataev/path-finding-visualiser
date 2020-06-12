@@ -7,7 +7,7 @@ import { AlgoContext } from "../AlgoContext";
 
 const useStyles = makeStyles((theme) => ({
   item: {
-    marginRight: theme.spacing(10),
+    marginRight: theme.spacing(5),
   },
 }));
 
