@@ -15,5 +15,3 @@ const Square = (props) => {
   );
 };
 export default Square;
-//https://github.com/konvajs/react-konva
-//https://codesandbox.io/s/ykqw8r4r21

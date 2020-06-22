@@ -62,7 +62,7 @@ const DropDown = (props) => {
           onClick={handleToggle}
         >
           Algorithms
-          <ArrowDropDownIcon></ArrowDropDownIcon>
+          <ArrowDropDownIcon />
         </Button>
         <Popper
           open={open}

@@ -6,8 +6,8 @@ const Grid = (props) => {
     <Stage width={props.width} height={props.height}>
       <Layer>
         <Rect
-          x={0}
-          y={0}
+          x={10}
+          y={10}
           width={100}
           height={100}
           fill={"red"}
@@ -18,5 +18,3 @@ const Grid = (props) => {
   );
 };
 export default Grid;
-
-//wrpa everyting in box element easier sizing
