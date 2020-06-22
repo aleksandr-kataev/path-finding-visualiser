@@ -1,27 +1,44 @@
-import React, { useState, createContext } from "react";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import MainHeader from "./components/main_header/MainHeader";
-import SubHeader from "./components/SubHeader";
-import Visualiser from "./components/Visualiser";
-import { Grid } from "@material-ui/core";
+import SubHeader from "./components/subheader/SubHeader";
+import Visualiser from "./components/visualiser/Visualiser";
+import { Grid, Box } from "@material-ui/core";
 import { AlgoProvider } from "./components/AlgoContext";
 import "./App.scss";
 
+const useStyles = makeStyles({
+  headerBox: {
+    width: "100%",
+    height: "7vh",
+  },
+  subHeaderBox: {
+    width: "100%",
+    height: "10vh",
+  },
+  visualiserBox: {
+    width: "100%",
+    height: "83vh",
+  },
+});
+
 const App = () => {
+  const classes = useStyles();
   return (
     <AlgoProvider>
-      <div className='app'>
+      <Box>
         <Grid container direction='column'>
           <Grid item>
-            <MainHeader />
+            <MainHeader className={classes.headerBox} />
           </Grid>
           <Grid item>
-            <SubHeader />
+            <SubHeader className={classes.subHeaderBox} />
           </Grid>
           <Grid item>
-            <Visualiser />
+            <Visualiser className={classes.visualiserBox} />
           </Grid>
         </Grid>
-      </div>
+      </Box>
     </AlgoProvider>
   );
 };

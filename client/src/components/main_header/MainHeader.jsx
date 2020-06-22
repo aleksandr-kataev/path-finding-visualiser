@@ -7,30 +7,26 @@ import { AlgoContext } from "../AlgoContext";
 
 const useStyles = makeStyles((theme) => ({
   item: {
-    marginRight: theme.spacing(5),
+    "&>*": {
+      marginRight: theme.spacing(7),
+      margin: theme.spacing(2),
+    },
   },
 }));
 
-const MainHeader = () => {
+const MainHeader = (props) => {
   const classes = useStyles();
   const [algo, setAlgo] = useContext(AlgoContext);
+
   return (
-    <div>
+    <div className={props.className}>
       <AppBar elevation={0} position='static'>
-        <Toolbar>
-          <Typography variant='h6' className={classes.item}>
-            Pathfinding Visualiser
-          </Typography>
-          <Button variant='contained' className={classes.item}>
-            Visualise {algo.type}
-          </Button>
-          <DropDown className={classes.item}></DropDown>
-          <Button variant='contained' className={classes.item}>
-            Clear walls
-          </Button>
-          <Button variant='contained' className={classes.item}>
-            Clear path
-          </Button>
+        <Toolbar className={classes.item}>
+          <Typography variant='h6'>Pathfinding Visualiser</Typography>
+          <Button variant='contained'>Visualise {algo.type}</Button>
+          <DropDown></DropDown>
+          <Button variant='contained'>Clear walls</Button>
+          <Button variant='contained'>Clear path</Button>
         </Toolbar>
       </AppBar>
     </div>
