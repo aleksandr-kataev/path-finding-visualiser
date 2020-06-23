@@ -23,8 +23,8 @@ const MainHeader = (props) => {
       <AppBar elevation={0} position='static'>
         <Toolbar className={classes.item}>
           <Typography variant='h6'>Pathfinding Visualiser</Typography>
-          <Button variant='contained'>Visualise {algo.type}</Button>
           <DropDown></DropDown>
+          <Button variant='contained'>Visualise {algo.type}</Button>
           <Button variant='contained'>Clear walls</Button>
           <Button variant='contained'>Clear path</Button>
         </Toolbar>

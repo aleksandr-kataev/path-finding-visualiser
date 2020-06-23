@@ -4,7 +4,7 @@ export const AlgoContext = createContext();
 
 export const AlgoProvider = (props) => {
   const [algo, setAlgo] = useState({
-    type: "",
+    type: null,
     startingPoint: { x: null, y: null },
     endingPoint: { x: null, y: null },
     obst: [],

@@ -9,15 +9,12 @@ import "./App.scss";
 
 const useStyles = makeStyles({
   headerBox: {
-    width: "100%",
     height: "7vh",
   },
   subHeaderBox: {
-    width: "100%",
     height: "10vh",
   },
   visualiserBox: {
-    width: "100%",
     height: "83vh",
   },
 });

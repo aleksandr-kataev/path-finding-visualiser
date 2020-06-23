@@ -30,7 +30,7 @@ const DropDown = (props) => {
   const classes = useStyles();
 
   async function fetchAlgorithms() {
-    const res = await axios
+    await axios
       .get("http://localhost:5000/db")
       //DEV http://localhost:5000/db
       //build /db

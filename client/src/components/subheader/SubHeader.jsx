@@ -1,16 +1,11 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Typography, Box } from "@material-ui/core";
+import { Typography, Box, Grid } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
 import { purple, grey, blueGrey, red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    background: "white",
-    position: "static",
-    height: "100%",
-  },
   barItem: {
     display: "flex",
     alignItems: "center",
@@ -20,31 +15,22 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolBar: {
-    height: "100%",
+    height: "80%",
+    "& > :first-child": {
+      marginLeft: theme.spacing(4),
+    },
     "&>*": {
-      marginRight: theme.spacing(7),
-      margin: theme.spacing(3),
+      marginRight: theme.spacing(10),
     },
   },
-  unvisitedNodes: {
-    width: "24px",
-    height: "24px",
+  icon: {
+    width: "2.4vh",
+    height: "2.4vh",
     outline: `1px solid ${blueGrey[500]}`,
   },
-  visitedNodes: {
-    width: "24px",
-    height: "24px",
-    color: `1px ${blueGrey[900]}`,
-  },
-  path: {
-    width: "24px",
-    height: "24px",
-    color: `1px ${red[500]}`,
-  },
-  obstacles: {
-    width: "24px",
-    height: "24px",
-    color: `1px ${grey[900]}`,
+  desciption: {
+    textAlign: "center",
+    marginTop: theme.spacing(-1),
   },
 }));
 
@@ -52,34 +38,44 @@ const SubHeader = (props) => {
   const classes = useStyles();
   return (
     <div className={props.className}>
-      <AppBar elevation={0} className={classes.appBar}>
-        <Toolbar className={classes.toolBar}>
-          <Box className={classes.barItem}>
-            <ArrowForwardIosIcon style={{ color: purple[500] }} />
-            <Typography variant='h6'>Start</Typography>
-          </Box>
-          <Box className={classes.barItem}>
-            <LocationSearchingIcon style={{ color: purple[500] }} />
-            <Typography variant='h6'>Target node</Typography>
-          </Box>
-          <Box className={classes.barItem}>
-            <Box className={classes.unvisitedNodes}></Box>
-            <Typography variant='h6'>Unvisited nodes</Typography>
-          </Box>
-          <Box className={classes.barItem}>
-            <Box className={classes.visitedNodes}></Box>
-            <Typography variant='h6'>Visited nodes</Typography>
-          </Box>
-          <Box className={classes.barItem}>
-            <Box className={classes.path}></Box>
-            <Typography variant='h6'>Shortest path</Typography>
-          </Box>
-          <Box className={classes.barItem}>
-            <Box className={classes.obstacles}></Box>
-            <Typography variant='h6'>Obstacles</Typography>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      <Grid container direction='row' className={classes.toolBar}>
+        <Box className={classes.barItem}>
+          <ArrowForwardIosIcon style={{ color: purple[900] }} />
+          <Typography variant='h6'>Start</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <LocationSearchingIcon style={{ color: purple[900] }} />
+          <Typography variant='h6'>Target node</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box className={classes.icon}></Box>
+          <Typography variant='h6'>Unvisited nodes</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box
+            className={classes.icon}
+            style={{ backgroundColor: purple[400] }}
+          ></Box>
+          <Typography variant='h6'>Visited nodes</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box
+            className={classes.icon}
+            style={{ backgroundColor: red[500] }}
+          ></Box>
+          <Typography variant='h6'>Shortest path</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box
+            className={classes.icon}
+            style={{ backgroundColor: grey[900] }}
+          ></Box>
+          <Typography variant='h6'>Obstacles</Typography>
+        </Box>
+      </Grid>
+      <Typography className={classes.desciption} variant='h6'>
+        A* is weighted and guarantee shortest path
+      </Typography>
     </div>
   );
 };
@@ -89,3 +85,42 @@ export default SubHeader;
 
 //double arrow icon for start
 //LocationSearching for finish
+/**
+ * <div className={props.className}>
+      <Grid container direction='row' className={classes.toolBar}>
+        <Box className={classes.barItem}>
+          <ArrowForwardIosIcon style={{ color: purple[900] }} />
+          <Typography variant='h6'>Start</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <LocationSearchingIcon style={{ color: purple[900] }} />
+          <Typography variant='h6'>Target node</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box className={classes.icon}></Box>
+          <Typography variant='h6'>Unvisited nodes</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box
+            className={classes.icon}
+            style={{ backgroundColor: purple[400] }}
+          ></Box>
+          <Typography variant='h6'>Visited nodes</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box
+            className={classes.icon}
+            style={{ backgroundColor: red[500] }}
+          ></Box>
+          <Typography variant='h6'>Shortest path</Typography>
+        </Box>
+        <Box className={classes.barItem}>
+          <Box
+            className={classes.icon}
+            style={{ backgroundColor: grey[900] }}
+          ></Box>
+          <Typography variant='h6'>Obstacles</Typography>
+        </Box>
+      </Grid>
+    </div>
+ */

@@ -11,10 +11,12 @@ const Grid = (props) => {
           width={100}
           height={100}
           fill={"red"}
-          shadowBlur={10}
+          shadowBlur={0}
         />
       </Layer>
     </Stage>
   );
 };
 export default Grid;
+
+//75*30 grid dimensions

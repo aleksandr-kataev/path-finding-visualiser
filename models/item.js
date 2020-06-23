@@ -6,27 +6,15 @@ const ItemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  timeCompl: {
-    type: String,
+  isWeighted: {
+    type: Boolean,
     required: true,
   },
-  spaceCompl: {
-    type: String,
+  isShortest: {
+    type: Boolean,
     required: true,
   },
 });
 
 const Item = mongoose.model("item", ItemSchema);
 module.exports = Item;
-
-/**
- * object = {
- * type: "algorithm"
- * name: 'linked list'
- * timeCompl: 'O(n2)'
- * spaceCompl: 'O(n2)'
- * }
- */
-
-//to store math symbols
-//https://www.mathjax.org/
