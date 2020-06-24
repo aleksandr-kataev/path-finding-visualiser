@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box, Grid } from "@material-ui/core";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
-import { purple, grey, blueGrey, red } from "@material-ui/core/colors";
+import { purple, grey, red, lightBlue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   barItem: {
@@ -26,11 +26,10 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     width: "2.4vh",
     height: "2.4vh",
-    outline: `1px solid ${blueGrey[500]}`,
+    outline: `1px solid ${lightBlue[300]}`,
   },
   desciption: {
     textAlign: "center",
-    marginTop: theme.spacing(-1),
   },
 }));
 

@@ -5,7 +5,6 @@ import SubHeader from "./components/subheader/SubHeader";
 import Visualiser from "./components/visualiser/Visualiser";
 import { Grid, Box } from "@material-ui/core";
 import { AlgoProvider } from "./components/AlgoContext";
-import "./App.scss";
 
 const useStyles = makeStyles({
   headerBox: {

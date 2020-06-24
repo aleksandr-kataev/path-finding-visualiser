@@ -1,20 +1,18 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import Grid from "./Grid";
+import GridVisualiser from "./GridVisualiser";
+import { Grid } from "@material-ui/core";
 
 const Visualiser = (props) => {
-  const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
-  const ref = useRef(null);
-  useEffect(() => {
-    setDimensions({
-      height: ref.current.clientHeight,
-      width: ref.current.offsetWidth,
-    });
-  }, [ref.current]);
   return (
-    <div className={props.className} ref={ref}>
-      <Grid height={dimensions.height} width={dimensions.width}></Grid>
-    </div>
+    <Grid
+      className={props.className}
+      container
+      alignItems='center'
+      justify='center'
+    >
+      <GridVisualiser height={752} width={1877}></GridVisualiser>
+    </Grid>
   );
 };
 export default Visualiser;

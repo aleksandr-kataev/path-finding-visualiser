@@ -2,13 +2,7 @@ import React, { useState } from "react";
 import { Stage, Layer, Rect } from "react-konva";
 import { Box } from "@material-ui/core";
 import { useEffect } from "react";
-import {
-  purple,
-  grey,
-  blueGrey,
-  red,
-  lightBlue,
-} from "@material-ui/core/colors";
+import { purple, grey, red, lightBlue } from "@material-ui/core/colors";
 
 const Grid = (props) => {
   const HEIGHT = 30;
@@ -25,14 +19,14 @@ const Grid = (props) => {
    */
 
   const initGrid = () => {
-    const rows = new Array(HEIGHT).fill(0);
-    const grid = rows.map(() => {
+    const rowsArray = new Array(HEIGHT).fill(0);
+    const gridArray = rowsArray.map(() => {
       return new Array(WIDTH).fill(0);
     });
     //setting start node and end node
-    grid[14][19] = 1;
-    grid[14][54] = 2;
-    return grid;
+    //gridArray[14][19] = 1;
+    //gridArray[14][54] = 2;
+    return gridArray;
   };
 
   const [grid, setGrid] = useState(initGrid);
@@ -87,8 +81,8 @@ const Grid = (props) => {
               }
               return (
                 <Rect
-                  x={x * SQUARE_DIMENSION + 1}
                   y={y * SQUARE_DIMENSION + 1}
+                  x={x * SQUARE_DIMENSION + 1}
                   width={SQUARE_DIMENSION}
                   height={SQUARE_DIMENSION}
                   fill={color}
@@ -104,21 +98,3 @@ const Grid = (props) => {
   );
 };
 export default Grid;
-
-//75*30 grid dimensions
-
-/**
- //TODO:
- //the grid is not centered, cant center using 
- * <Grid
-  container
-  spacing={0}
-  direction="column"
-  alignItems="center"
-  justify="center"
-  style={{ minHeight: '100vh' }}
->
- //because the canvas is full width and height of the components 
- //the componets just draws the grid from top right corner
- //adjust teh dimensions of the cavnas 
- */
