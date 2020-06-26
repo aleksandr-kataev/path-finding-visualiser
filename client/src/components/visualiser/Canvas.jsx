@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Stage, Layer, Rect } from "react-konva";
+import { Stage, Layer, Rect, Circle, Arrow } from "react-konva";
 import { Box } from "@material-ui/core";
 import { purple, grey, red, lightBlue } from "@material-ui/core/colors";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
 
 const Canvas = (props) => {
   const HEIGHT = 30;
   const WIDTH = 75;
   const SQUARE_DIMENSION = 25;
-  const DEFAULT_START = { x: 14, y: 52 };
-  const DEFAULT_END = { x: 14, y: 19 };
+  const DEFAULT_START = { x: 14, y: 19 };
+  const DEFAULT_END = { x: 14, y: 55 };
+
   const colorMap = {
     unvisited: grey[50],
-    start: purple[400],
-    end: red[500],
+    start: grey[50],
+    end: grey[50],
     obstacle: grey[900],
     open: purple[400],
     path: red[500],
@@ -25,8 +24,8 @@ const Canvas = (props) => {
     for (let i = 0; i < WIDTH; i++) {
       for (let j = 0; j < HEIGHT; j++) {
         gridArr.push({
-          x: j,
-          y: i,
+          x: i,
+          y: j,
           type:
             j == DEFAULT_START.x && i == DEFAULT_START.y
               ? "start"
@@ -83,14 +82,13 @@ const Canvas = (props) => {
 
   return (
     <Box>
-      <button onClick={clearGrid}>123</button>
       <Stage width={props.width} height={props.height}>
         <Layer>
           {grid.map((rect) => {
             return (
               <Rect
-                y={rect.x * SQUARE_DIMENSION + 1}
-                x={rect.y * SQUARE_DIMENSION + 1}
+                x={rect.x * SQUARE_DIMENSION + 1}
+                y={rect.y * SQUARE_DIMENSION + 1}
                 width={SQUARE_DIMENSION}
                 height={SQUARE_DIMENSION}
                 fill={colorMap[rect.type]}
@@ -98,6 +96,37 @@ const Canvas = (props) => {
                 strokeWidth={1}
               />
             );
+          })}
+
+          {grid.map((rect) => {
+            if (rect.type == "start") {
+              console.log(rect);
+              return (
+                <Arrow
+                  points={[
+                    rect.x * SQUARE_DIMENSION + 1,
+                    rect.y * SQUARE_DIMENSION + 13,
+                    rect.x * SQUARE_DIMENSION + 25,
+                    rect.y * SQUARE_DIMENSION + 13,
+                  ]}
+                  pointerLength={5}
+                  pointerWidth={5}
+                  fill='black'
+                  stroke='black'
+                  strokeWidth={1}
+                />
+              );
+            }
+            if (rect.type == "end") {
+              return (
+                <Circle
+                  radius={7}
+                  fill={"black"}
+                  x={rect.x * SQUARE_DIMENSION + 13}
+                  y={rect.y * SQUARE_DIMENSION + 13}
+                />
+              );
+            }
           })}
         </Layer>
       </Stage>

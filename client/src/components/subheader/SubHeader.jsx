@@ -1,9 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box, Grid } from "@material-ui/core";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import LocationSearchingIcon from "@material-ui/icons/LocationSearching";
 import { purple, grey, red, lightBlue } from "@material-ui/core/colors";
+import { Stage, Layer, Rect, Circle, Arrow } from "react-konva";
 
 const useStyles = makeStyles((theme) => ({
   barItem: {
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   toolBar: {
     height: "80%",
     "& > :first-child": {
-      marginLeft: theme.spacing(4),
+      marginLeft: theme.spacing(5),
     },
     "&>*": {
       marginRight: theme.spacing(10),
@@ -39,11 +38,42 @@ const SubHeader = (props) => {
     <div className={props.className}>
       <Grid container direction='row' className={classes.toolBar}>
         <Box className={classes.barItem}>
-          <ArrowForwardIosIcon style={{ color: purple[900] }} />
+          <Stage width={26} height={26}>
+            <Layer>
+              <Arrow
+                points={[1, 13, 23, 13]}
+                pointerLength={5}
+                pointerWidth={5}
+                fill='black'
+                stroke='black'
+                strokeWidth={1}
+              />
+              <Rect
+                x={0}
+                y={0}
+                width={26}
+                height={26}
+                stroke={lightBlue[200]}
+                strokeWidth={2}
+              />
+            </Layer>
+          </Stage>
           <Typography variant='h6'>Start</Typography>
         </Box>
         <Box className={classes.barItem}>
-          <LocationSearchingIcon style={{ color: purple[900] }} />
+          <Stage width={26} height={26}>
+            <Layer>
+              <Circle radius={7} fill={"black"} x={13} y={13} />
+              <Rect
+                x={0}
+                y={0}
+                width={26}
+                height={26}
+                stroke={lightBlue[200]}
+                strokeWidth={2}
+              />
+            </Layer>
+          </Stage>
           <Typography variant='h6'>Target node</Typography>
         </Box>
         <Box className={classes.barItem}>

@@ -16,5 +16,3 @@ const Visualiser = (props) => {
   );
 };
 export default Visualiser;
-
-//wrpa everyting in box element easier sizing

@@ -25,6 +25,9 @@ const MainHeader = (props) => {
           <Typography variant='h6'>Pathfinding Visualiser</Typography>
           <DropDown></DropDown>
           <Button variant='contained'>Visualise {algo.type}</Button>
+          <Button variant='contained'>Start start</Button>
+          <Button variant='contained'>Set end</Button>
+
           <Button variant='contained'>Clear walls</Button>
           <Button variant='contained'>Clear path</Button>
         </Toolbar>
