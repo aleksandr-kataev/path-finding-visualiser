@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import GridVisualiser from "./GridVisualiser";
+import Canvas from "./Canvas";
 import { Grid } from "@material-ui/core";
 
 const Visualiser = (props) => {
@@ -11,7 +11,7 @@ const Visualiser = (props) => {
       alignItems='center'
       justify='center'
     >
-      <GridVisualiser height={752} width={1877}></GridVisualiser>
+      <Canvas height={752} width={1877}></Canvas>
     </Grid>
   );
 };
