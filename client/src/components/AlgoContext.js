@@ -5,9 +5,9 @@ export const AlgoContext = createContext();
 export const AlgoProvider = (props) => {
   const [algo, setAlgo] = useState({
     type: null,
-    startingPoint: { x: null, y: null },
-    endingPoint: { x: null, y: null },
-    obst: [],
+    start: { x: null, y: null },
+    end: { x: null, y: null },
+    obstacles: [],
     path: [],
   });
   return (

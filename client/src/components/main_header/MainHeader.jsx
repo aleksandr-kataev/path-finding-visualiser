@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MainHeader = (props) => {
   const classes = useStyles();
-  const [algo, setAlgo] = useContext(AlgoContext);
+  const [algo] = useContext(AlgoContext);
 
   return (
     <div className={props.className}>
@@ -27,7 +27,6 @@ const MainHeader = (props) => {
           <Button variant='contained'>Visualise {algo.type}</Button>
           <Button variant='contained'>Start start</Button>
           <Button variant='contained'>Set end</Button>
-
           <Button variant='contained'>Clear walls</Button>
           <Button variant='contained'>Clear path</Button>
         </Toolbar>
