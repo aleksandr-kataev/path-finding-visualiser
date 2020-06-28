@@ -44,9 +44,9 @@ const SubHeader = (props) => {
                 points={[1, 13, 23, 13]}
                 pointerLength={5}
                 pointerWidth={5}
-                fill='black'
-                stroke='black'
-                strokeWidth={1}
+                fill='red'
+                stroke='red'
+                strokeWidth={2}
               />
               <Rect
                 x={0}
@@ -63,7 +63,7 @@ const SubHeader = (props) => {
         <Box className={classes.barItem}>
           <Stage width={26} height={26}>
             <Layer>
-              <Circle radius={7} fill={"black"} x={13} y={13} />
+              <Circle radius={7} fill={"red"} x={13} y={13} />
               <Rect
                 x={0}
                 y={0}

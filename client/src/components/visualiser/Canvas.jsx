@@ -5,14 +5,10 @@ import { AlgoContext } from "../AlgoContext";
 import { GridNode, GridStart, GridEnd } from "./GridNode";
 import { grey, lightBlue } from "@material-ui/core/colors";
 
-//const DEFAULT_START = { x: 14, y: 19 };
-//const DEFAULT_END = { x: 14, y: 55 };
 const Canvas = (props) => {
   const HEIGHT = 30;
   const WIDTH = 75;
   const SQUARE_DIMENSION = 25;
-  const DEFAULT_START = { x: 18, y: 14 };
-  const DEFAULT_END = { x: 56, y: 14 };
   const [algo, setAlgo] = useContext(AlgoContext);
   const rows = new Array(HEIGHT).fill(0);
   const grid = rows.map(() => {
@@ -22,24 +18,10 @@ const Canvas = (props) => {
   useEffect(() => {
     setAlgo({
       ...algo,
-      start: { x: DEFAULT_START.x, y: DEFAULT_START.y },
-      end: { x: DEFAULT_END.x, y: DEFAULT_END.y },
+      start: { x: algo.DEFAULT_START.x, y: algo.DEFAULT_START.y },
+      end: { x: algo.DEFAULT_END.x, y: algo.DEFAULT_END.y },
     });
   }, []);
-
-  const clearObstacles = () => {
-    setAlgo({ ...algo, obstacles: [] });
-  };
-
-  const clearGrid = () => {
-    setAlgo({
-      ...algo,
-      start: { x: DEFAULT_START.x, y: DEFAULT_START.y },
-      end: { x: DEFAULT_END.x, y: DEFAULT_END.y },
-      obstacles: [],
-      path: [],
-    });
-  };
 
   return (
     <Box>

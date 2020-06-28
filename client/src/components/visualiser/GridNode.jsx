@@ -20,8 +20,6 @@ export const GridNode = (node) => {
       width={node.node.dimension}
       height={node.node.dimension}
       fill={colorMap[node.node.type]}
-      stroke={lightBlue[200]}
-      strokeWidth={1}
     />
   );
 };
@@ -37,9 +35,9 @@ export const GridStart = (node) => {
       ]}
       pointerLength={5}
       pointerWidth={5}
-      fill='black'
-      stroke='black'
-      strokeWidth={1}
+      fill='red'
+      stroke='red'
+      strokeWidth={2}
     />
   );
 };
@@ -48,7 +46,7 @@ export const GridEnd = (node) => {
   return (
     <Circle
       radius={7}
-      fill={"black"}
+      fill={"red"}
       x={node.node.x * node.node.dimension + 13}
       y={node.node.y * node.node.dimension + 13}
     />

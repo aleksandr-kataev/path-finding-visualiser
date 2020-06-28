@@ -7,6 +7,8 @@ import { AlgoContext } from "../AlgoContext";
 const Visualiser = (props) => {
   const [isLeftMouseDown, setIsLeftMouseDown] = useState(false);
   const [isRightMouseDown, setIsRightMouseDown] = useState(false);
+  const [isDraggingStart, setIsDraggingStart] = useState(false);
+  const [isDraggingEnd, setIsDraggingEnd] = useState(false);
   const [algo, setAlgo] = useContext(AlgoContext);
 
   const handleContextMenu = (event) => {
@@ -15,7 +17,19 @@ const Visualiser = (props) => {
 
   const handleMouseDown = (event) => {
     if (event.button === 0) {
-      setIsLeftMouseDown(true);
+      if (
+        Math.trunc(event.nativeEvent.offsetX / 25) === algo.start.x &&
+        Math.trunc(event.nativeEvent.offsetY / 25) === algo.start.y
+      ) {
+        setIsDraggingStart(true);
+      } else if (
+        Math.trunc(event.nativeEvent.offsetX / 25) === algo.end.x &&
+        Math.trunc(event.nativeEvent.offsetY / 25) === algo.end.y
+      ) {
+        setIsDraggingEnd(true);
+      } else {
+        setIsLeftMouseDown(true);
+      }
     }
     if (event.button === 2) {
       setIsRightMouseDown(true);
@@ -24,6 +38,12 @@ const Visualiser = (props) => {
 
   const handleMouseUp = (event) => {
     event.stopPropagation();
+    if (isDraggingStart) {
+      setIsDraggingStart(false);
+    }
+    if (isDraggingEnd) {
+      setIsDraggingEnd(false);
+    }
     if (event.button === 0) {
       setIsLeftMouseDown(false);
       registerObstacle(event);
@@ -35,12 +55,40 @@ const Visualiser = (props) => {
   };
 
   const handleMouseMove = (event) => {
+    if (isDraggingStart) {
+      setStartEnd(event, "start");
+    }
+    if (isDraggingEnd) {
+      setStartEnd(event, "end");
+    }
     if (isLeftMouseDown) {
       registerObstacle(event);
     }
     if (isRightMouseDown) {
       removeObstacle(event);
     }
+  };
+
+  const setStartEnd = (event, type) => {
+    const x = Math.trunc(event.nativeEvent.offsetX / 25);
+    const y = Math.trunc(event.nativeEvent.offsetY / 25);
+    let isAllowed = false;
+    if (
+      algo.obstacles.findIndex(
+        (obstacle) => obstacle.x === x && obstacle.y === y
+      ) == -1
+    ) {
+      if (
+        (type === "start" && (x !== algo.end.x || y !== algo.end.y)) ||
+        (type === "end" && (x !== algo.start.x || y !== algo.start.y))
+      ) {
+        isAllowed = true;
+      }
+    }
+    setAlgo({
+      ...algo,
+      [type]: isAllowed ? { x: x, y: y } : { x: algo[type].x, y: algo[type].y },
+    });
   };
 
   const removeObstacle = (event) => {
@@ -60,7 +108,7 @@ const Visualiser = (props) => {
         setAlgo({
           ...algo,
           obstacles: algo.obstacles.filter(
-            (elem) => elem.x !== x || elem.y !== y
+            (obstacle) => obstacle.x !== x || obstacle.y !== y
           ),
         });
       }
