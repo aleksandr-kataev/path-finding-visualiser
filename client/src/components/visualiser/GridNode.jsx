@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Rect, Circle, Arrow } from "react-konva";
-import { purple, grey, red, lightBlue } from "@material-ui/core/colors";
+import { purple, grey, red } from "@material-ui/core/colors";
 
 const colorMap = {
   unvisited: grey[50],
@@ -17,9 +17,9 @@ export const GridNode = (node) => {
     <Rect
       x={node.node.x * node.node.dimension + 1}
       y={node.node.y * node.node.dimension + 1}
+      fill={colorMap[node.node.type]}
       width={node.node.dimension}
       height={node.node.dimension}
-      fill={colorMap[node.node.type]}
     />
   );
 };

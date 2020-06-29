@@ -9,7 +9,6 @@ import {
   makeStyles,
   Button,
 } from "@material-ui/core";
-import axios from "axios";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { AlgoContext } from "../AlgoContext";
 
@@ -23,33 +22,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const DropDown = (props) => {
-  const [data, setData] = useState({ algorithms: [], err: null });
   const [open, setOpen] = useState(false);
   const [algo, setAlgo] = useContext(AlgoContext);
   const anchorRef = useRef(null);
   const classes = useStyles();
 
-  async function fetchAlgorithms() {
-    await axios
-      .get("http://localhost:5000/db")
-      //DEV http://localhost:5000/db
-      //build /db
-      .then((res) => setData({ ...data, algorithms: res.data }))
-      .catch((e) => setData({ ...data, err: e }));
-  }
-
-  useEffect(() => {
-    fetchAlgorithms();
-  }, []);
-
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-  const handleClose = (name, event) => {
+
+  const handleClose = () => {
     setOpen(false);
-    if (typeof name !== "object") {
-      setAlgo({ ...algo, type: name });
-    }
+  };
+  const handleSetAlgo = (item) => {
+    setAlgo({
+      ...algo,
+      type: item.name,
+      isWeighted: item.isWeighted,
+      isShortest: item.isShortest,
+    });
+    handleClose();
   };
 
   return (
@@ -79,13 +71,13 @@ const DropDown = (props) => {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={(e) => handleClose(algo, e)}>
+                <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id='menu-list-grow'>
-                    {!data.err ? (
-                      data.algorithms.map((item, i) => (
+                    {!props.data.err ? (
+                      props.data.algorithms.map((item, i) => (
                         <MenuItem
                           key={i}
-                          onClick={(e) => handleClose(item.name, e)}
+                          onClick={(e) => handleSetAlgo(item, e)}
                         >
                           {item.name}
                         </MenuItem>

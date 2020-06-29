@@ -11,6 +11,8 @@ export const AlgoProvider = (props) => {
     end: { x: null, y: null },
     obstacles: [],
     path: [],
+    isWeighted: null,
+    isShortest: null,
   });
   useEffect(() => {
     if (algo.start === algo.end) {

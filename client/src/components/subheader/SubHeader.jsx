@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Box, Grid } from "@material-ui/core";
 import { purple, grey, red, lightBlue } from "@material-ui/core/colors";
 import { Stage, Layer, Rect, Circle, Arrow } from "react-konva";
+import { AlgoContext } from "../AlgoContext";
 
 const useStyles = makeStyles((theme) => ({
   barItem: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SubHeader = (props) => {
+  const [algo, setAlgo] = useContext(AlgoContext);
   const classes = useStyles();
   return (
     <div className={props.className}>
@@ -102,9 +104,14 @@ const SubHeader = (props) => {
           <Typography variant='h6'>Obstacles</Typography>
         </Box>
       </Grid>
-      <Typography className={classes.desciption} variant='h6'>
-        A* is weighted and guarantee shortest path
-      </Typography>
+      {algo.type !== null && (
+        <Typography className={classes.desciption} variant='h6'>
+          {algo.type} is {algo.isWeighted ? "weighted" : "not weighted"} and{" "}
+          {algo.isShortest
+            ? "guarantees shortest path"
+            : "does not guarante shortest path"}
+        </Typography>
+      )}
     </div>
   );
 };

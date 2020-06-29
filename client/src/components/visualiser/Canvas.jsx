@@ -26,7 +26,7 @@ const Canvas = (props) => {
   return (
     <Box>
       <Stage width={props.width} height={props.height}>
-        <Layer>
+        <Layer hitGraphEnabled={false}>
           {grid.map((row, y) => {
             return row.map((_, x) => {
               return (
@@ -80,9 +80,3 @@ const Canvas = (props) => {
 };
 
 export default Canvas;
-
-//https://konvajs.org/docs/react/Simple_Animations.html
-
-//https://stackoverflow.com/questions/30803440/delayed-rendering-of-react-components
-
-//create a separate component for node in there have a animation function a prop that makes the node visible/unvisible for the delayed render

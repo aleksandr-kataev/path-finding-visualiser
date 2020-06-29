@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import DropDown from "./DropDown";
 import { Button } from "@material-ui/core";
 import { AlgoContext } from "../AlgoContext";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   item: {
@@ -17,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
 const MainHeader = (props) => {
   const classes = useStyles();
   const [algo, setAlgo] = useContext(AlgoContext);
+  const [data, setData] = useState({ algorithms: [], err: null });
+
+  useEffect(() => {
+    fetchAlgorithms();
+  }, []);
 
   const clearObstacles = () => {
     setAlgo({ ...algo, obstacles: [] });
@@ -32,13 +38,22 @@ const MainHeader = (props) => {
     });
   };
 
+  async function fetchAlgorithms() {
+    await axios
+      .get("http://localhost:5000/db")
+      //DEV http://localhost:5000/db
+      //build /db
+      .then((res) => setData({ ...data, algorithms: res.data }))
+      .catch((e) => setData({ ...data, err: e }));
+  }
+
   return (
     <div className={props.className}>
       <AppBar elevation={0} position='static'>
         <Toolbar className={classes.item}>
           <Typography variant='h6'>Pathfinding Visualiser</Typography>
-          <DropDown></DropDown>
-          <Button variant='contained'>Visualise{algo.type}</Button>
+          <DropDown data={data}></DropDown>
+          <Button variant='contained'>Visualise {algo.type}</Button>
           <Button variant='contained' onClick={clearObstacles}>
             Clear walls
           </Button>
