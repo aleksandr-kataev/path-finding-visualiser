@@ -1,2 +1,2 @@
-# Algo_Visualiser
-Algorithm visualiser made with React, Java and Node
+# Path finding visualiser
+Made with React, Java and Node
