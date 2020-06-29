@@ -104,12 +104,17 @@ const SubHeader = (props) => {
           <Typography variant='h6'>Obstacles</Typography>
         </Box>
       </Grid>
-      {algo.type !== null && (
+      {algo.type !== null ? (
         <Typography className={classes.desciption} variant='h6'>
           {algo.type} is {algo.isWeighted ? "weighted" : "not weighted"} and{" "}
           {algo.isShortest
             ? "guarantees shortest path"
             : "does not guarante shortest path"}
+        </Typography>
+      ) : (
+        <Typography className={classes.desciption} variant='h6'>
+          {" "}
+          Pick an algorithm!
         </Typography>
       )}
     </div>
