@@ -40,9 +40,9 @@ const MainHeader = (props) => {
 
   async function fetchAlgorithms() {
     await axios
-      .get("http://localhost:5000/db")
+      .get("/db")
       //DEV http://localhost:5000/db
-      //build /db
+      //build
       .then((res) => setData({ ...data, algorithms: res.data }))
       .catch((e) => setData({ ...data, err: e }));
   }
